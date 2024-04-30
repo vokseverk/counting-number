@@ -1,14 +1,14 @@
 # Counting-number
 A [custom component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements) to automatically increment a number when the component enters the viewport
 
-```
+```html
 <counting-number data-culture="da" data-duration="600" data-delay="2000">900</counting-number>
 ```
 
 ## Installation
 Include the following line in your `head` section like this:
-```
-<script src="coutingnumber.js"></script>
+```html
+<script src="countingnumber.js"></script>
 ```
 
 ## Properties
@@ -18,4 +18,4 @@ Include the following line in your `head` section like this:
 |duration |number   |0   	|
 |delay   	|number   |0   	|
 
-All numbers are in miliseconds
+All numbers are in milliseconds
