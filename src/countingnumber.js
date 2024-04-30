@@ -38,6 +38,8 @@ class CountingNumber extends HTMLElement {
         const progress = elapsed / this.duration
 
         const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+        //const easeInCubic = (t) => t * t * t
+        //const easeOutCubic = (t) => --t * t * t + 1
         const easedProgress = easeInOutCubic(progress)
 
         this.value = Math.min(this.targetValue * easedProgress, this.targetValue)
