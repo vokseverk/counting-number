@@ -43,10 +43,6 @@ class CountingNumber extends HTMLElement {
             requestAnimationFrame(this.animateCount.bind(this));
         }
     }
-
-    disconnectedCallback() {
-        console.log('We are disconnected!');
-    };
 }
 
 customElements.define('counting-number', CountingNumber);
