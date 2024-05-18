@@ -67,4 +67,8 @@ class CountingNumber extends HTMLElement {
 	}
 }
 
-customElements.define('counting-number', CountingNumber)
+export { CountingNumber }
+
+export default function registerElement() {
+	customElements.define('counting-number', CountingNumber)
+}
