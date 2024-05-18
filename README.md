@@ -1,27 +1,37 @@
 # &lt;counting-number&gt; element
 
-A [custom component][CUSTOM] to automatically increment a number when the component enters the viewport
+A [custom element][CUSTOM] to automatically increment a number when the element enters the
+viewport.
+
+## Usage
+
+Include the [script file][FILE] in your HTML like this:
 
 ```html
-<counting-number data-culture="da" data-duration="600" data-delay="2000">900</counting-number>
+<script type="module">
+	import registerElement from './path/to/counting-number.js'
+	registerElement()
+</script>
+
 ```
 
-## Installation
-
-Include the following line in your `head` section like this:
+And add the element to your page wherever you need an auto-incrementing number:
 
 ```html
-<script type="module" src="counting-number.js"></script>
+<counting-number culture="da" duration="600" delay="2000">900</counting-number>
 ```
 
-## Properties
 
-|Name   	|Type   	|Default value |
-|---	    |---	    |---	       |
-|culture    |string     |"en-US"   	   |
-|duration   |number     |0             |
-|delay   	|number     |0             |
+
+## Properties/attributes
+
+| Name     | Type       | Default value | Description                           |
+|---       |---         |---            |---                                    |
+| culture  | string     | "en-US"       | Used to format the number accordingly |
+| duration | number     | 0             | How long the counting should take     |
+| delay    | number     | 0             | How long before the counting starts after the element has entered the viewport |
 
 All numbers are in milliseconds.
 
 [CUSTOM]: https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
+[FILE]: src/counting-number.js
