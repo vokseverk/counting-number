@@ -4,13 +4,13 @@ class CountingNumber extends HTMLElement {
 		targetValue: 0,
 		duration: 1000,
 		delay: 0,
-		startTime: null,
 		decimals: 0,
 		culture: 'en-US'
 	}
 
 	constructor() {
 		super()
+		this.startTime = null
 	}
 
 	connectedCallback() {
