@@ -4,26 +4,38 @@
 	<meta charset="utf-8">
 	<title>Counting Number Testpage</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+	body { font-size: 2rem; }
+	h1 { text-align: center; }
+	main {
+		text-align: center;
+		inline-size: max(75%, 20rem);
+		margin: auto;
+	}
+	.spacer { min-block-size: 200vh; }
+	</style>
 </head>
 <body>
 
 <h1>Counting Numbers Test</h1>
 
-<p>
-	<counting-number>500</counting-number>
-</p>
+<main>
+	<p>
+		<counting-number>500</counting-number>
+	</p>
 
-<p>
-	<counting-number>100</counting-number>
-</p>
+	<p>
+		<counting-number>100</counting-number>
+	</p>
 
-<div class="spacer" style="min-block-size: 200vh">
-	(Content to make the page extra long)
-</div>
+	<div class="spacer">
+		(Content to make the page extra long)
+	</div>
 
-<p>
-	<counting-number>33</counting-number>
-</p>
+	<p>
+		<counting-number>33</counting-number>
+	</p>
+</main>
 
 <script type="module" src="src/counting-number.js"></script>
 
