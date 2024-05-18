@@ -17,9 +17,9 @@ class CountingNumber extends HTMLElement {
 		const defaults = CountingNumber.defaults
 
 		this.targetValue = this.textContent || defaults.targetValue
-		this.duration = Number(this.dataset.duration) || defaults.duration
-		this.delay = Number(this.dataset.delay) || defaults.delay
-		this.culture = this.dataset.culture || defaults.culture
+		this.duration = Number(this.getAttribute('duration')) || defaults.duration
+		this.delay = Number(this.getAttribute('delay')) || defaults.delay
+		this.culture = this.getAttribute('culture') || defaults.culture
 
 		this.textContent = Intl.NumberFormat(this.culture).format(this.targetValue)
 		this.decimals = this.countDecimals(this.targetValue) || defaults.decimals
