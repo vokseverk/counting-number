@@ -40,7 +40,8 @@ class CountingNumber extends HTMLElement {
 	}
 
 	animateCount(timestamp) {
-		if (!this.startTime) this.startTime = timestamp
+		this.startTime ||= timestamp
+
 		const elapsed = timestamp - this.startTime
 		const progress = elapsed / this.duration
 
