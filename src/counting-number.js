@@ -60,12 +60,13 @@ class CountingNumber extends HTMLElement {
 		}
 	}
 
-	countDecimals(value) {
-		var valueConv = value.toString().replace(",", ".")
-		if (Math.floor(value) === Number(value)) return 0
 	updateValue(value = this.value) {
 		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(value.toFixed(this.decimals))
 	}
+
+	countDecimals(value) {
+		var valueConv = value.toString().replace(",", ".")
+		if (Math.floor(value) === Number(value)) return 0
 		this.targetValue = valueConv
 
 		return valueConv.split(".")[1].length || 0
