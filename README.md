@@ -8,13 +8,17 @@ viewport.
 Include the [script file][FILE] in your HTML like this:
 
 ```html
-<script type="module">
-	import registerElement from './path/to/counting-number.js'
-	registerElement()
-</script>
+<script type="module" src="/path/to/counting-number-browser.min.js"></script>
 ```
 
-And add the element to your page wherever you need an auto-incrementing number:
+Alternatively, you can use manually import and register the component like this:
+
+```javascript
+import registerElement from './path/to/counting-number.js'
+registerElement()
+```
+
+Now add the element to your page wherever you need an auto-incrementing number:
 
 ```html
 <h2>
@@ -37,8 +41,7 @@ for the actual value and format the fallback as you please, e.g.:
 
 ## Formatting
 
-The number will be formatted using the language in scope, i.e. the closest ancestor having a
-`lang` attribute - or you can set the language explicitly on the element:
+The number will be formatted using the language in scope, i.e. the closest ancestor having a `lang` attribute - or you can set the language explicitly on the element:
 
 ```html
 <div lang="en">
@@ -47,9 +50,6 @@ The number will be formatted using the language in scope, i.e. the closest ances
 	<p>Norwegian: <counting-number value="1234.5" lang="no">1 234,5</counting-number></p>
 </div>
 ```
-
-
-
 
 
 ## Properties/attributes
@@ -64,4 +64,4 @@ The number will be formatted using the language in scope, i.e. the closest ances
 Timing values are in milliseconds.
 
 [CUSTOM]: https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
-[FILE]: src/counting-number.js
+[FILE]: dist/counting-number-browser.min.js

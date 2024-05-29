@@ -33,6 +33,12 @@
 		(Content to make the page extra long)
 	</div>
 
+	<div lang="en">
+		<p>English: <counting-number delay="200" value="1234.5">1,234.5</counting-number></p>
+		<p>Danish: <counting-number delay="1000" value="1234.5" lang="da">1.234,5</counting-number></p>
+		<p>Norwegian: <counting-number delay="2000" value="1234.5" lang="no">1 234,5</counting-number></p>
+	</div>
+
 	<p>
 		<counting-number duration="2000" delay="500">33</counting-number>
 	</p>
@@ -42,10 +48,11 @@
 	</p>
 </main>
 
-<script type="module">
+<script src="./dist/counting-number-browser.min.js"></script>
+<!-- <script type="module">
 	import registerElement from './src/counting-number.js'
 	registerElement()
-</script>
+</script> -->
 
 </body>
 </html>
