@@ -1,21 +1,28 @@
 class CountingNumber extends HTMLElement {
+	static defaults = {
+		value: 0,
+		targetValue: 0,
+		duration: 1000,
+		delay: 0,
+		decimals: 0,
+		culture: 'en-US'
+	}
+
 	constructor() {
 		super()
-		this.value = 0
-		this.targetValue = 0
-		this.duration = 0
-		this.delay = 0
 		this.startTime = null
-		this.decimals = 0
 	}
 
 	connectedCallback() {
-		this.targetValue = this.textContent
-		this.duration = Number(this.dataset.duration)
-		this.delay = Number(this.dataset.delay)
-		this.culture = this.dataset.culture || 'en-US'
+		const defaults = CountingNumber.defaults
+
+		this.targetValue = this.textContent || defaults.targetValue
+		this.duration = Number(this.getAttribute('duration')) || defaults.duration
+		this.delay = Number(this.getAttribute('delay')) || defaults.delay
+		this.culture = this.getAttribute('culture') || defaults.culture
+
 		this.textContent = Intl.NumberFormat(this.culture).format(this.targetValue)
-		this.decimals = this.countDecimals(this.targetValue)
+		this.decimals = this.countDecimals(this.targetValue) || defaults.decimals
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
@@ -33,7 +40,8 @@ class CountingNumber extends HTMLElement {
 	}
 
 	animateCount(timestamp) {
-		if (!this.startTime) this.startTime = timestamp
+		this.startTime ||= timestamp
+
 		const elapsed = timestamp - this.startTime
 		const progress = elapsed / this.duration
 
@@ -59,6 +67,8 @@ class CountingNumber extends HTMLElement {
 	}
 }
 
-export default function defineCountingNumber() {
+export { CountingNumber }
+
+export default function registerElement() {
 	customElements.define('counting-number', CountingNumber)
 }
