@@ -19,7 +19,7 @@ class CountingNumber extends HTMLElement {
 		this.targetValue = Number(this.getAttribute('value')) || this.textContent || defaults.targetValue
 		this.duration = Number(this.getAttribute('duration')) || defaults.duration
 		this.delay = Number(this.getAttribute('delay')) || defaults.delay
-		this.culture = this.getAttribute('culture') || defaults.culture
+		this.culture = this.getLanguage()
 
 		// Set starting value
 		this.updateValue(0)
@@ -62,6 +62,17 @@ class CountingNumber extends HTMLElement {
 
 	updateValue(value = this.value) {
 		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(value.toFixed(this.decimals))
+	}
+
+	getLanguage() {
+		let language = "en"
+
+		const decider = this.closest('[lang]')
+		if (decider && decider.lang != '') {
+			language = decider.lang
+		}
+
+		return language
 	}
 
 	static getDecimalCount(value) {
