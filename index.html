@@ -12,6 +12,7 @@
 		inline-size: max(75%, 20rem);
 		margin: auto;
 	}
+	counting-number { font-variant-numeric: tabular-nums; }
 	.spacer { min-block-size: 200vh; }
 	</style>
 </head>
@@ -33,7 +34,11 @@
 	</div>
 
 	<p>
-		<counting-number duration="3000" delay="1000">33</counting-number>
+		<counting-number duration="2000" delay="500">33</counting-number>
+	</p>
+
+	<p>
+		We have <counting-number duration="20000" delay="200">12.00</counting-number>% more content!
 	</p>
 </main>
 
