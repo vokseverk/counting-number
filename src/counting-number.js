@@ -23,6 +23,8 @@ class CountingNumber extends HTMLElement {
 
 		this.textContent = Intl.NumberFormat(this.culture).format(this.targetValue)
 		this.decimals = this.countDecimals(this.targetValue) || defaults.decimals
+		// Set starting value
+		this.updateValue(0)
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
