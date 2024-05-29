@@ -5,7 +5,7 @@ class CountingNumber extends HTMLElement {
 		duration: 1000,
 		delay: 0,
 		decimals: 0,
-		culture: 'en-US'
+		culture: 'en'
 	}
 
 	constructor() {
@@ -16,15 +16,18 @@ class CountingNumber extends HTMLElement {
 	connectedCallback() {
 		const defaults = CountingNumber.defaults
 
-		this.targetValue = Number(this.getAttribute('value')) || this.textContent || defaults.targetValue
+		this.typedValue = this.getAttribute('value') || this.textContent
+		this.targetValue = Number(this.typedValue) || defaults.targetValue
 		this.duration = Number(this.getAttribute('duration')) || defaults.duration
 		this.delay = Number(this.getAttribute('delay')) || defaults.delay
-		this.culture = this.getLanguage()
+		this.culture = this.getLanguage(defaults.culture)
+
+		this.decimals = CountingNumber.getDecimalCount(this.typedValue) || defaults.decimals
+		this.formatter = new Intl.NumberFormat(this.culture, { minimumFractionDigits: this.decimals, maximumFractionDigits: this.decimals })
 
 		// Set starting value
-		this.updateValue(0)
-
-		this.decimals = CountingNumber.getDecimalCount(this.targetValue) || defaults.decimals
+		this.currentValue = 0
+		this.updateValue()
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
@@ -52,20 +55,20 @@ class CountingNumber extends HTMLElement {
 		//const easeOutCubic = (t) => --t * t * t + 1
 		const easedProgress = easeInOutCubic(progress)
 
-		this.value = Math.min(this.targetValue * easedProgress, this.targetValue)
+		this.currentValue = Math.min(this.targetValue * easedProgress, this.targetValue)
 		this.updateValue()
 
-		if (this.value < this.targetValue) {
+		if (this.currentValue < this.targetValue) {
 			requestAnimationFrame(this.animateCount.bind(this))
 		}
 	}
 
-	updateValue(value = this.value) {
-		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(value.toFixed(this.decimals))
+	updateValue(value = this.currentValue) {
+		this.textContent = this.formatter.format(value)
 	}
 
-	getLanguage() {
-		let language = "en"
+	getLanguage(defaultLanguage) {
+		let language = defaultLanguage
 
 		const decider = this.closest('[lang]')
 		if (decider && decider.lang != '') {
@@ -76,15 +79,11 @@ class CountingNumber extends HTMLElement {
 	}
 
 	static getDecimalCount(value) {
-		let valueConv = value.toString()
+		let valueConv = value != null ? value.toString() : '0'
 
 		if (valueConv.indexOf('.') < 0) {
 			return 0
 		}
-
-		valueConv = valueConv.replace(',', '.')
-
-		this.targetValue = valueConv
 
 		return valueConv.split(".")[1].length || 0
 	}
