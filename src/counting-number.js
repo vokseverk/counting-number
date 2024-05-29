@@ -51,7 +51,7 @@ class CountingNumber extends HTMLElement {
 		const easedProgress = easeInOutCubic(progress)
 
 		this.value = Math.min(this.targetValue * easedProgress, this.targetValue)
-		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(this.value.toFixed(this.decimals))
+		this.updateValue()
 
 		if (this.value < this.targetValue) {
 			requestAnimationFrame(this.animateCount.bind(this))
@@ -61,6 +61,9 @@ class CountingNumber extends HTMLElement {
 	countDecimals(value) {
 		var valueConv = value.toString().replace(",", ".")
 		if (Math.floor(value) === Number(value)) return 0
+	updateValue(value = this.value) {
+		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(value.toFixed(this.decimals))
+	}
 		this.targetValue = valueConv
 
 		return valueConv.split(".")[1].length || 0
