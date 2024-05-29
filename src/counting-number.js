@@ -16,7 +16,7 @@ class CountingNumber extends HTMLElement {
 	connectedCallback() {
 		const defaults = CountingNumber.defaults
 
-		this.targetValue = this.textContent || defaults.targetValue
+		this.targetValue = Number(this.getAttribute('value')) || this.textContent || defaults.targetValue
 		this.duration = Number(this.getAttribute('duration')) || defaults.duration
 		this.delay = Number(this.getAttribute('delay')) || defaults.delay
 		this.culture = this.getAttribute('culture') || defaults.culture
