@@ -21,10 +21,10 @@ class CountingNumber extends HTMLElement {
 		this.delay = Number(this.getAttribute('delay')) || defaults.delay
 		this.culture = this.getAttribute('culture') || defaults.culture
 
-		this.textContent = Intl.NumberFormat(this.culture).format(this.targetValue)
-		this.decimals = this.countDecimals(this.targetValue) || defaults.decimals
 		// Set starting value
 		this.updateValue(0)
+
+		this.decimals = CountingNumber.getDecimalCount(this.targetValue) || defaults.decimals
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
@@ -64,9 +64,15 @@ class CountingNumber extends HTMLElement {
 		this.textContent = Intl.NumberFormat(this.culture, { minimumfractiondigits: this.decimals }).format(value.toFixed(this.decimals))
 	}
 
-	countDecimals(value) {
-		var valueConv = value.toString().replace(",", ".")
-		if (Math.floor(value) === Number(value)) return 0
+	static getDecimalCount(value) {
+		let valueConv = value.toString()
+
+		if (valueConv.indexOf('.') < 0) {
+			return 0
+		}
+
+		valueConv = valueConv.replace(',', '.')
+
 		this.targetValue = valueConv
 
 		return valueConv.split(".")[1].length || 0
