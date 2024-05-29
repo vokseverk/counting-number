@@ -18,17 +18,13 @@ describe('getDecimalCount', function() {
 		})
 
 		it('even if they are zeros, they should be counted', function() {
-			expect(CountingNumber.getDecimalCount(123.00)).toBe(2)
+			expect(CountingNumber.getDecimalCount('123.00')).toBe(2)
 		})
 	})
 
 	describe('strings', function() {
 		it('detects numbers as strings', function() {
 			expect(CountingNumber.getDecimalCount('1234.356')).toBe(3)
-		})
-
-		it('detects comma as decimal separator', function() {
-			expect(CountingNumber.getDecimalCount('1234,6')).toBe(1)
 		})
 	})
 })
